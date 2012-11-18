@@ -9,13 +9,16 @@ function! say#Say() range
     for line_number in range(a:firstline, a:lastline)
         let line_content = line_content.". ".getline(line_number)
     endfor
-    let str = "\"".(s:EscapeExclamation(line_content))."\""
+    let str = "\"".(s:Escape(line_content))."\""
     exec "r!say ".str
 endfunction
 
 " escape exclamation mark (!)
-function! s:EscapeExclamation(str)
-    return substitute(a:str, "!", ".", "g")
+function! s:Escape(str)
+    let str = substitute(a:str, "!", ".", "g")
+    let str = substitute(str, "\"", "", "g")
+    let str = substitute(str, "#", " hash ", "g")
+    return str
 endfunction
 
 let &cpo = s:save_cpo
