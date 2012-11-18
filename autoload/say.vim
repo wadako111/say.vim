@@ -3,7 +3,8 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! say_vim#Say() range
+let g:testtest = "nnnn"
+function! say#Say() range
     let line_content = ""
     for line_number in range(a:firstline, a:lastline)
         let line_content = line_content.". ".getline(line_number)
